@@ -1,18 +1,18 @@
-import React, { useRef } from "react";
-import { Code, MessageCircle, Home } from "react-feather";
-import styled from "styled-components";
-import MenuIcon from "../../assets/images/menu.svg";
-import { useOnClickOutside } from "../../hooks/useOnClickOutside";
-import useToggle from "../../hooks/useToggle";
-import { useTranslation } from "react-i18next";
+import React, { useRef } from 'react'
+import { Code, MessageCircle, Home } from 'react-feather'
+import styled from 'styled-components'
+import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
+import { useOnClickOutside } from '../../hooks/useOnClickOutside'
+import useToggle from '../../hooks/useToggle'
+import { useTranslation } from 'react-i18next'
 
-import { ExternalLink } from "../../theme";
+import { ExternalLink } from '../../theme'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
     stroke: ${({ theme }) => theme.text1};
   }
-`;
+`
 
 const StyledMenuButton = styled.button`
   width: 100%;
@@ -37,7 +37,7 @@ const StyledMenuButton = styled.button`
   svg {
     margin-top: 2px;
   }
-`;
+`
 
 const StyledMenu = styled.div`
   margin-left: 0.5rem;
@@ -47,13 +47,13 @@ const StyledMenu = styled.div`
   position: relative;
   border: none;
   text-align: left;
-`;
+`
 
 const MenuFlyout = styled.span`
   min-width: 8.125rem;
   background-color: ${({ theme }) => theme.bg3};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
-    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 24px 32px rgba(0, 0, 0, 0.01);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
+    0px 24px 32px rgba(0, 0, 0, 0.01);
   border-radius: 0.5rem;
   padding: 0.5rem;
   display: flex;
@@ -63,7 +63,7 @@ const MenuFlyout = styled.span`
   top: 3rem;
   right: 0rem;
   z-index: 100;
-`;
+`
 
 const MenuItem = styled(ExternalLink)`
   flex: 1;
@@ -77,13 +77,14 @@ const MenuItem = styled(ExternalLink)`
   > svg {
     margin-right: 8px;
   }
-`;
+`
 
 export default function Menu() {
-  const node = useRef<HTMLDivElement>(undefined);
-  const [open, toggle] = useToggle(false);
-  const { t } = useTranslation();
-  useOnClickOutside(node, open ? toggle : undefined);
+  const node = useRef<HTMLDivElement>()
+  const [open, toggle] = useToggle(false)
+  const { t } = useTranslation()
+
+  useOnClickOutside(node, open ? toggle : undefined)
 
   return (
     <StyledMenu ref={node as any}>
@@ -94,18 +95,18 @@ export default function Menu() {
         <MenuFlyout>
           <MenuItem id="link" href="https://cypherium.network/">
             <Home size={14} />
-            {t("Website")}
+            {t('Website')}
           </MenuItem>
           <MenuItem id="link" href="https://discord.gg/PfpUATX">
             <MessageCircle size={14} />
-            {t("discord")}
+            {t('discord')}
           </MenuItem>
           <MenuItem id="link" href="https://github.com/PureStake/cypherium">
             <Code size={14} />
-            {t("code")}
+            {t('code')}
           </MenuItem>
         </MenuFlyout>
       )}
     </StyledMenu>
-  );
+  )
 }

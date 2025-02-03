@@ -1,1 +1,1 @@
-declare module "fortmatic";
+declare module 'formatic'

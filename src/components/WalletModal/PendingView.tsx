@@ -1,11 +1,11 @@
-import { AbstractConnector } from "@web3-react/abstract-connector";
-import React from "react";
-import styled from "styled-components";
-import Option from "./Option";
-import { SUPPORTED_WALLETS } from "../../constants";
-import { injected } from "../../connectors";
-import { darken } from "polished";
-import Loader from "../Loader";
+import { AbstractConnector } from '@web3-react/abstract-connector'
+import React from 'react'
+import styled from 'styled-components'
+import Option from './Option'
+import { SUPPORTED_WALLETS } from '../../constants'
+import { injected } from '../../connectors'
+import { darken } from 'polished'
+import Loader from '../Loader'
 
 const PendingSection = styled.div`
   ${({ theme }) => theme.flexColumnNoWrap};
@@ -15,11 +15,11 @@ const PendingSection = styled.div`
   & > * {
     width: 100%;
   }
-`;
+`
 
 const StyledLoader = styled(Loader)`
   margin-right: 1rem;
-`;
+`
 
 const LoadingMessage = styled.div<{ error?: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -27,19 +27,19 @@ const LoadingMessage = styled.div<{ error?: boolean }>`
   justify-content: flex-start;
   border-radius: 12px;
   margin-bottom: 20px;
-  color: ${({ theme, error }) => (error ? theme.red1 : "inherit")};
+  color: ${({ theme, error }) => (error ? theme.red1 : 'inherit')};
   border: 1px solid ${({ theme, error }) => (error ? theme.red1 : theme.text4)};
 
   & > * {
     padding: 1rem;
   }
-`;
+`
 
 const ErrorGroup = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   align-items: center;
   justify-content: flex-start;
-`;
+`
 
 const ErrorButton = styled.div`
   border-radius: 8px;
@@ -55,26 +55,26 @@ const ErrorButton = styled.div`
     cursor: pointer;
     background-color: ${({ theme }) => darken(0.1, theme.text4)};
   }
-`;
+`
 
 const LoadingWrapper = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
   align-items: center;
   justify-content: center;
-`;
+`
 
 export default function PendingView({
   connector,
   error = false,
   setPendingError,
-  tryActivation,
+  tryActivation
 }: {
-  connector?: AbstractConnector;
-  error?: boolean;
-  setPendingError: (error: boolean) => void;
-  tryActivation: (connector: AbstractConnector) => void;
+  connector?: AbstractConnector
+  error?: boolean
+  setPendingError: (error: boolean) => void
+  tryActivation: (connector: AbstractConnector) => void
 }) {
-  const isMetamask = ((window as unknown) as any).ethereum?.isMetaMask;
+  const isMetamask = window?.ethereum?.isMetaMask
 
   return (
     <PendingSection>
@@ -85,8 +85,8 @@ export default function PendingView({
               <div>Error connecting.</div>
               <ErrorButton
                 onClick={() => {
-                  setPendingError(false);
-                  connector && tryActivation(connector);
+                  setPendingError(false)
+                  connector && tryActivation(connector)
                 }}
               >
                 Try Again
@@ -100,15 +100,15 @@ export default function PendingView({
           )}
         </LoadingWrapper>
       </LoadingMessage>
-      {Object.keys(SUPPORTED_WALLETS).map((key) => {
-        const option = SUPPORTED_WALLETS[key];
+      {Object.keys(SUPPORTED_WALLETS).map(key => {
+        const option = SUPPORTED_WALLETS[key]
         if (option.connector === connector) {
           if (option.connector === injected) {
-            if (isMetamask && option.name !== "MetaMask") {
-              return null;
+            if (isMetamask && option.name !== 'MetaMask') {
+              return null
             }
-            if (!isMetamask && option.name === "MetaMask") {
-              return null;
+            if (!isMetamask && option.name === 'MetaMask') {
+              return null
             }
           }
           return (
@@ -119,12 +119,12 @@ export default function PendingView({
               color={option.color}
               header={option.name}
               subheader={option.description}
-              icon={require("../../assets/images/" + option.iconName)}
+              icon={require('../../assets/images/' + option.iconName)}
             />
-          );
+          )
         }
-        return null;
+        return null
       })}
     </PendingSection>
-  );
+  )
 }
