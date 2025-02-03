@@ -9,12 +9,12 @@ import { NetworkConnector } from "./NetworkConnector";
 
 const NETWORK_URL = process.env.REACT_APP_NETWORK_URL
   ? process.env.REACT_APP_NETWORK_URL
-  : "https://rpc.api.cypherium.cypherium.io";
+  : "https://pubnodes.cypherium.io/rpc";
 const FORMATIC_KEY = process.env.REACT_APP_FORTMATIC_KEY;
 const PORTIS_ID = process.env.REACT_APP_PORTIS_ID;
 
 export const NETWORK_CHAIN_ID: number = parseInt(
-  process.env.REACT_APP_CHAIN_ID ?? "16165"
+  process.env.REACT_APP_CHAIN_ID ?? "16166"
 );
 
 if (typeof NETWORK_URL === "undefined") {
@@ -34,13 +34,13 @@ export function getNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [16162, 16163],
-  //supportedChainIds: [1, 3, 4, 5, 42, 16165]
+  supportedChainIds: [16162, 16166],
+  //supportedChainIds: [1, 3, 4, 5, 42, 16166]
 });
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { 16165: NETWORK_URL },
+  rpc: { 16166: NETWORK_URL },
   bridge: "https://bridge.walletconnect.org",
   qrcode: true,
   // pollingInterval: 15000,

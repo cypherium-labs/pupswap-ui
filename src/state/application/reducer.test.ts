@@ -75,7 +75,7 @@ describe('application reducer', () => {
       store.dispatch(updateBlockNumber({ chainId: ChainId.ROPSTEN, blockNumber: 2 }))
       expect(store.getState().blockNumber).toEqual({
         [ChainId.CYPHER_MAINNET]: 16162,
-        [ChainId.ROPSTEN]: 16163
+        [ChainId.ROPSTEN]: 16166
       })
     })
   })
